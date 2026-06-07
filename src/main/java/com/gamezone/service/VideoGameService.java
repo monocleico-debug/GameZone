@@ -25,19 +25,23 @@ public class VideoGameService {
 
     // añadir con validaciones
     public void addVideoGame(VideoGame vg) {
+        StringBuilder errors = new StringBuilder();
+
         if (vg.getTitle() == null || vg.getTitle().isBlank()) {
-            throw new IllegalArgumentException(
-                    "ERROR... El titulo no puede ser null o vacio");
+            errors.append("• El título no puede estar vacío.\n");
         }
         if (vg.getPrice() <= 0) {
-            throw new IllegalArgumentException(
-                    "ERROR... El precio debe ser mayor que 0");
+            errors.append("• El precio debe ser mayor a 0.\n");
         }
         if (vg.getStock() < 0) {
-            throw new IllegalArgumentException(
-                    "ERROR...Stock debe ser mayor o igual a 0");
+            errors.append("• El stock debe ser mayor o igual a 0.\n");
         }
-        repo.create(vg);
+
+        if (errors.length() > 0) {
+            throw new IllegalArgumentException(errors.toString());
+        }
+
+        repo.create(vg); // lanza "El videojuego ya existe en el catálogo"
     }
 
     // Lista

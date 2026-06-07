@@ -194,10 +194,12 @@ public class MainController extends Application {
                 s.close();
 
             } catch (NumberFormatException ex) {
-                alert(Alert.AlertType.WARNING, "ADVERTENCIA", ex.getMessage());
+                alert(Alert.AlertType.ERROR,
+                        "Error de formato",
+                        "Precio, stock y titulo deben ser  válidos.");
             } catch (IllegalArgumentException ex) {
-                alert(Alert.AlertType.ERROR, "Error Formato",
-                        "Precio, stock, tamaño o titulo deben ser numeros validos y NO espacios vacios");
+                alert(Alert.AlertType.WARNING,
+                        "Advertencia", ex.getMessage());
             }
         });
 
